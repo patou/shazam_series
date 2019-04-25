@@ -69,9 +69,9 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
 			for (var i = 0; i < responses[0].payload.length; i++) {
 				var item = responses[0].payload[i];
 				var score = (item.classification.score * 100).toFixed(4);
-				result += `Result :  ${item.displayName} <br/> Score : ${score}%`;
+				result += `Je pense que cette photo est tirée de la série <b>${getName(item.displayName)}</b> avec une probabilité ${score}%`;
 			}
-			if (result === "") result = "Impossible de detecter cette série, c'est quoi ?";
+			if (result === "") result = "Impossible de detecter cette série, mais j'apprend encore ?";
 			console.log(result);
 			res.end(result);
 
@@ -87,6 +87,17 @@ app.post('/upload', upload.single('photo'), function (req, res, next) {
 		});
 
 });
+
+function getName(displayName) {
+	switch (displayName) {
+		case "friends":
+			return "Friends";
+		case "got":
+			return "Game of Thrones";
+		default:
+			return displayName;
+	}
+}
 
 function addEvent(data) {
 	//console.log("Log Event :", data);
