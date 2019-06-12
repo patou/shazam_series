@@ -94,6 +94,8 @@ function getName(displayName) {
 			return "Friends";
 		case "got":
 			return "Game of Thrones";
+		case "southpark":
+			return "South Park";
 		default:
 			return displayName;
 	}
